@@ -10,12 +10,11 @@ pub fn generator(input: &str) -> Vec<Card> {
     let mut output: Vec<Card> = Vec::new();
     input.lines().for_each(|line| {
         let (_, numbers) = line.split_at(9);
-        let (mut winning_string, actuall_string) = numbers.split_at(32);
-        winning_string = &winning_string[..winning_string.len() - 1];
+        let (winning_string, actuall_string) = numbers.split_at(32);
         let mut winning_numbers: [u8; 10] = [0; 10];
         let mut actuall_numbers: [u8; 25] = [0; 25];
         let mut counter = 0;
-        for i in winning_string.split(' ') {
+        for i in winning_string[..winning_string.len() - 1].split(' ') {
             match i {
                 "" => {}
                 other => {
