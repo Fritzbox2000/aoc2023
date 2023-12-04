@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+#![allow(unused_imports)]
 use aoc_runner_derive::aoc;
 
 pub struct Coord {

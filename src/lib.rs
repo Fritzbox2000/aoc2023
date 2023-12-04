@@ -1,3 +1,4 @@
+#![allow(unused_imports)]
 extern crate aoc_runner;
 
 use aoc_runner_derive::aoc_lib;

@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+#![allow(unused_imports)]
 use aoc_runner_derive::aoc;
 use rayon::prelude::*;
 
@@ -130,17 +132,17 @@ pub fn part_2_main(input: &str) -> u32 {
 mod tests {
     use super::*;
 
-    const test_inp: &str = "1abc2
+    const TEST_INP: &str = "1abc2
 pqr3stu8vwx
 a1b2c3d4e5f
 treb7uchet";
     #[test]
     fn test_simple_input() {
-        assert_eq!(part_1_main(test_inp), 142)
+        assert_eq!(part_1_main(TEST_INP), 142)
     }
 
     #[test]
     fn test_simple_input2() {
-        assert_eq!(outer_in(test_inp), 142)
+        assert_eq!(outer_in(TEST_INP), 142)
     }
 }

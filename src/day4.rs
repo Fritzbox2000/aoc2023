@@ -1,3 +1,5 @@
+#![allow(unused_imports)]
+#![allow(dead_code)]
 use aoc_runner_derive::{aoc, aoc_generator};
 
 pub struct Card {
@@ -14,9 +16,10 @@ pub fn generator(input: &str) -> Vec<Card> {
         let mut winning_numbers: [u8; 10] = [0; 10];
         let mut actuall_numbers: [u8; 25] = [0; 25];
         let mut counter = 0;
-        for i in winning_string[..winning_string.len() - 1].split(' ') {
+        for i in winning_string.split(' ') {
             match i {
                 "" => {}
+                "|" => {}
                 other => {
                     winning_numbers[counter] = other.parse::<u8>().unwrap();
                     counter += 1;
