@@ -55,7 +55,7 @@ pub fn main(cards: &[Card]) -> u32 {
             }
         }
         if card_score != 0 {
-            card_score = (1 as u32) << (card_score - 1);
+            card_score = 1_u32 << (card_score - 1);
         }
         output += card_score;
     }
@@ -64,6 +64,7 @@ pub fn main(cards: &[Card]) -> u32 {
 
 mod tests {
     use super::*;
+
     const TEST_INP: &str = "Card   1: 57 76 72 11  8 28 15 38 54 46 | 77 87 71 98 40  7 84 43 61 64  5 50 19 83 79 99 36 47  4 95 30 44 37 55 26
 Card   2: 44 69 14 83 54 48 21  6 20 26 | 80 26 86  3  9  4 62 34 15 87 60 88 90 29 65 46 92 73 24 12 40 10 99 37 74
 Card   3: 15 60 63 84 20 93 36 39 17 19 | 68 80 17 91 20 84 69 72 15 39  5 61 74 99 60 85 19 45 24 79 53 36  7 63 93

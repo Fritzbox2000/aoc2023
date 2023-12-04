@@ -1,4 +1,4 @@
-use aoc_runner_derive::{aoc, aoc_generator};
+use aoc_runner_derive::aoc;
 
 pub struct Coord {
     x: usize,
@@ -15,7 +15,7 @@ pub fn main(input: &str) -> u32 {
     let mut output = 0;
     // ok maybe I'm over thinking stuff
     let mut index: Option<usize> = Some(0);
-    while index != None {
+    while index.is_some() {
         println!("INDEX: {:?}", index);
         // println!(
         //     "test: {:?}",
@@ -25,13 +25,13 @@ pub fn main(input: &str) -> u32 {
         // );
         let first_index = input[index.unwrap()..]
             .bytes()
-            .position(|c| c as u8 >= b'0' || c as u8 <= b'9');
+            .position(|c| c >= b'0' || c <= b'9');
         println!("first_index: {:?}", first_index);
         match first_index {
             Some(first_index_i) => {
                 let second_index = input[first_index_i..]
                     .bytes()
-                    .position(|c| c as u8 <= b'0' || c as u8 >= b'9')
+                    .position(|c| c <= b'0' || c >= b'9')
                     .unwrap();
                 println!("Second_index {:?}", second_index);
                 let number = input[first_index_i..first_index_i + second_index]
@@ -39,14 +39,14 @@ pub fn main(input: &str) -> u32 {
                     .unwrap();
                 println!("{:?}", number);
                 // now I need to search around this number to find characters
-                for Coord in make_rect(
+                for coord in make_rect(
                     conv_index_coord(first_index_i, length),
                     second_index - 1 - first_index_i,
                     length,
                     height,
                 ) {
-                    let char_at_coord = get_char_at_coord(input, Coord, length);
-                    if char_at_coord < b'0' || char_at_coord > b'9' {
+                    let char_at_coord = get_char_at_coord(input, coord, length);
+                    if !(b'0'..=b'9').contains(&char_at_coord) {
                         output += number
                     }
                 }

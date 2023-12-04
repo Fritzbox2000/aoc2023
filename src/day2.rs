@@ -18,10 +18,7 @@ pub fn generator(input: &str) -> Vec<Game> {
         .map(|line| {
             let end_number = line[5..].find(':').unwrap();
             let game_id = line[5..5 + end_number].parse::<u32>().unwrap();
-            let rounds: Vec<Round> = line[5 + end_number..]
-                .split(';')
-                .map(|round| parse_round(round))
-                .collect();
+            let rounds: Vec<Round> = line[5 + end_number..].split(';').map(parse_round).collect();
             Game {
                 id: game_id,
                 red: rounds.iter().map(|s| s.red).max().unwrap(),
@@ -72,6 +69,7 @@ pub fn part_2_main(input: &[Game]) -> u32 {
 
 mod tests {
     use super::*;
+
     const test_inp: &str = "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
 Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
 Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red
