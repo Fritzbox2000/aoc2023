@@ -64,6 +64,46 @@ pub fn main(cards: &[Card]) -> u32 {
     }
     output
 }
+#[aoc(day4, part1, iterator_i_hardly_know_her)]
+pub fn main_iter(cards: &[Card]) -> u32 {
+    let mut output = 0;
+    for card in cards {
+        let card_score = card
+            .winning_numbers
+            .iter()
+            .filter(|&elem1| card.actuall_numbers.iter().any(|&elem2| elem1 == &elem2))
+            .count();
+        output += card_score.checked_sub(1).map_or(0, |out| 1_u32 << (out));
+    }
+    output
+}
+
+#[aoc(day4, part2, main)]
+pub fn part2_main(cards: &[Card]) -> u32 {
+    let mut output = 0;
+    let mut wins: Vec<u32> = Vec::with_capacity(200);
+    cards.iter().for_each(|card| {
+        let mut card_score = 0;
+        card.actuall_numbers.iter().for_each(|act| {
+            card.winning_numbers.iter().for_each(|win| {
+                if win == act {
+                    card_score += 1;
+                }
+            });
+            wins.push(card_score);
+        })
+    });
+    let mut search_stack: Vec<usize> = (0..wins.len() - 1).collect();
+    while let Some(top) = search_stack.pop() {
+        output += 1;
+        for to_add in 1..wins[top] {
+            if top + (to_add as usize) + 1 < wins.len() {
+                search_stack.push(top + (to_add as usize))
+            }
+        }
+    }
+    output
+}
 
 mod tests {
     use super::*;
